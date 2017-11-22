@@ -1,4 +1,4 @@
 /**
  * exporting schema
  */
-module.exports=require('./todo')
+module.exports=require('./todo.gql')

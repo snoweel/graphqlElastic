@@ -1,4 +1,4 @@
-
+`
 type User{
         id:String
         fname:String
@@ -34,3 +34,4 @@ extend type Query{
         userId:String
     ): [ToDo]
 }
+`
