@@ -28,18 +28,10 @@ catch(error){
 }
 
 var schema = require('./InquiryAPIs/schema');
-// const GRAPHQL_PORT = 3000;
-const { apolloServer } = require('graphql-tools');
-// graphQLServer.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
-// graphQLServer.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
-app.use('/graphql', apolloServer({
-  graphiql: true,
-  pretty: true,
-  schema: Schema
-  // resolvers: Resolvers,
-  //mocks: Mocks,
-}));
 
 module.exports=app

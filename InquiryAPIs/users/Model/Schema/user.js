@@ -1,0 +1,33 @@
+
+const typeDef=`type Query{
+
+ #defining find user query
+    getUserDetails(
+        id:String!
+    ): User
+ 
+# defining find active users query
+
+    getActiveUsers : [User]
+
+# find all todos of a particular user 
+ 
+    getToDos(
+        userId:String!
+    ) : [ToDo]
+ #  find active todos of user whose targetDate is atmost tomorrow
+      getActiveToDos (
+        userId:String
+    ): [ToDo]
+}
+type User{
+    id:String
+    fname:String
+    lname:String
+    email:String
+    isActive:Boolean
+    birthDate:String
+    pinCode:Int
+}`
+
+module.exports=typeDef

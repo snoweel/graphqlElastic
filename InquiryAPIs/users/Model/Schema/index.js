@@ -1,4 +1,4 @@
 /**
  * exporting user schema
  */
-module.exports=require('./user.gql')
+module.exports=require('./user.js')
