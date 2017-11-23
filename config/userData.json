@@ -1,18 +1,18 @@
-[{
-    id:"1"
-    fname:"Alex"
-    lname:"Galllio"
-    email:"dfdgf@hhj.com"
-    isActive:true
-    birthDate:"12/12/1990"
-    pinCode:12133
+{"data":[{
+    "id":"1",
+    "fname":"Alex",
+    "lname":"Galllio",
+    "email":"dfdgf@hhj.com",
+    "isActive":true,
+    "birthDate":"12/12/1990",
+    "pinCode":12133
 },
 {
-    id:"2"
-    fname:"Alia"
-    lname:"Zener"
-    email:"dfdgf@hhj.com"
-    isActive:true
-    birthDate:"12/12/1997"
-    pinCode:12133
-}]
+    "id":"2",
+    "fname":"Alia",
+    "lname":"Zener",
+    "email":"dfdgf@hhj.com",
+    "isActive":true,
+    "birthDate":"12/12/1997",
+    "pinCode":12133
+}]}

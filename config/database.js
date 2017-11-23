@@ -1,6 +1,6 @@
 //declaring module
 var elasticsearch = require('elasticsearch');
-var index="assignment",type="user";
+var index="assignment01",type="user";
 var fs=require('fs')
 //instantiating elastic search client
 exports.connectToES = function(){
@@ -20,7 +20,9 @@ exports.connectToES = function(){
 createIndex=function(indexName,typeName,esClient){
 	return new Promise(function(resolve,reject){
 		esClient.indices.create({
-		  index:indexName
+			index:indexName,
+			updateAllTypes:true,
+			"read-only":false
 		},function(err,resp){
 		  if(err){
 			console.log(err);
@@ -55,13 +57,19 @@ createIndex=function(indexName,typeName,esClient){
   }
   
   addDoc=function(indexName,typeName,esClient){
-	  var values=fs.readSync('./userData.json');
-		  console.log("adding doc",values);
-		  esClient.bulk({
-			  index: indexName,
-			  type: typeName,
-			  body:values
-		  })
+		var values=fs.readFileSync('./config/userData.json');
+		values=JSON.parse(values)
+		esClient.bulk({
+			body: [
+				// action description
+				{ index:  { _index: indexName, _type: typeName, _id: 1 } },
+				 // the document to index
+				values
+			]
+		},function(err,resp){
+			console.log(err)
+			console.log(resp)
+		})
 	}
 	
   initIndex=function(index,type,esClient){
