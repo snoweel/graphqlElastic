@@ -73,14 +73,12 @@ createIndex=function(indexName,typeName,esClient){
 	}
 	
   initIndex=function(index,type,esClient){
-	indexExists(index,esClient).then(function(res){
-		console.log(res)
-		addDoc(index,type,esClient)
-		if(!res){
-			console.log("creating index")
-			createIndex(index,type,esClient).then(function(){
-				addDoc(index,type,esClient)
-			})
-		}
-	})
+	// indexExists(index,esClient).then(function(res){
+	// 	if(!res){
+	// 		console.log("creating index")
+	// 		createIndex(index,type,esClient).then(function(){
+	// 			addDoc(index,type,esClient)
+	// 		})
+	// 	}
+	// })
   }

@@ -2,7 +2,7 @@
 /**
  * declaring required modules
  */
-const query = require('../../../DB/queryUtil.js')
+const queryUtil = require('../../../DB/queryUtil.js')
 /**
  * defining resolver functions 
  */
@@ -15,17 +15,18 @@ const resolvers = {
      * @param {*} ctx 
      * @param {*} info 
      */
-     getUserDetails(root, args,ctx,info){
+     getUserDetails:(_, args)=>{
+       console.log("here")
          if(args.userId){
-            body: {
-                query: {
-                  match:{
-                      query:args.userId
-                      field: id
+            body={
+                "query": {
+                  "match":{
+                      "query":args.userId,
+                      "field": id
                   }
                 }
               }
-            return query.getUserDetails('users',body)
+            return queryUtil.getUserDetails('user',body)
          }
             
       },
@@ -36,17 +37,19 @@ const resolvers = {
      * @param {*} ctx 
      * @param {*} info 
      */
-     getActiveUsers(root,args,ctx,info){
-        body: {
-            query: {
-              match:{
-                  query:true
-                  field: isActive
+     getActiveUsers:(_)=>{
+      console.log("here")
+        body={
+            "query": {
+              "match":{
+                  "query":true,
+                  "field": "isActive"
               }
             }
           }
-          return query.getUserDetails('users',body)
+          return queryUtil.getUserDetails('user',body)
     }
+  
     //,
     // /**
     //  * retrieves all todos of a particular user
