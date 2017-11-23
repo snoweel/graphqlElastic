@@ -1,6 +1,7 @@
 //declaring module
 var elasticsearch = require('elasticsearch');
 var index="assignment",type="user";
+var fs=require('fs')
 //instantiating elastic search client
 exports.connectToES = function(){
 	return new Promise(function(resolve,reject){
@@ -19,9 +20,7 @@ exports.connectToES = function(){
 createIndex=function(indexName,typeName,esClient){
 	return new Promise(function(resolve,reject){
 		esClient.indices.create({
-		  index:indexName,
-		  type:typeName,
-		  id:1
+		  index:indexName
 		},function(err,resp){
 		  if(err){
 			console.log(err);
@@ -40,7 +39,6 @@ createIndex=function(indexName,typeName,esClient){
   * function to check whether index exists or not
   */
   indexExists=function(indexName,esClient) {
-	  // return esClient.indices.exists({index:indexName});
 	  return new Promise(function(resolve,reject){
 		esClient.indices.exists({
 		  index:indexName
@@ -50,7 +48,8 @@ createIndex=function(indexName,typeName,esClient){
 			  reject(err)
 		  }
 		  console.log("exist",exists);
-		  if(exists)   resolve(true);
+			if(exists)   resolve(true);
+			else resolve(false)
 		});
 	  });
   }
@@ -63,13 +62,17 @@ createIndex=function(indexName,typeName,esClient){
 			  type: typeName,
 			  body:values
 		  })
-  }
+	}
+	
   initIndex=function(index,type,esClient){
-	console.log("initialize")
-	if(!indexExists(index,esClient)){
-		console.log("creating index")
-	  createIndex(index,type,esClient).then(function(){
-		  addDoc(index,type,esClient)
-	  })
-  }
+	indexExists(index,esClient).then(function(res){
+		console.log(res)
+		addDoc(index,type,esClient)
+		if(!res){
+			console.log("creating index")
+			createIndex(index,type,esClient).then(function(){
+				addDoc(index,type,esClient)
+			})
+		}
+	})
   }

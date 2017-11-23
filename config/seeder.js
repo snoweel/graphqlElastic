@@ -27,7 +27,7 @@ module.exports=function(esClient){
 /*
 * function to check whether index exists or not
 */
-indexExists=function(indexName) {
+indexExists=function(indexName,esClient) {
     // return esClient.indices.exists({index:indexName});
     return new Promise(function(resolve,reject){
       esClient.indices.exists({
@@ -41,7 +41,7 @@ indexExists=function(indexName) {
     });
 }
 
-addDoc=function(indexName,typeName){
+addDoc=function(indexName,typeName,esClient){
     var values=fs.readSync('./userData.json');
     // values={
     //     title:cards[i].title,
@@ -59,11 +59,11 @@ addDoc=function(indexName,typeName){
             body:values
         })
 }
-initIndex=function(index,type){
+initIndex=function(index,type,esClient){
   console.log("initialize")
-  if(!indexExists(index)){
-    createIndex(index,type).then(function(){
-        addDoc(index,type)
+  if(!indexExists(index,esClient)){
+    createIndex(index,type,esClient).then(function(){
+        addDoc(index,type,esClient)
     })
 }
 }
