@@ -9,6 +9,7 @@ type User{
     isActive:Boolean
     birthDate:String
     pinCode:Int
+    todos:[ToDo]
 }
 type ToDo{
     id:String
@@ -20,7 +21,7 @@ type ToDo{
 type Query{
 
  #defining find user query
-    getUserDetails(id:String): User
+    getUserDetails(userId:String): User
  
 # defining find active users query
     getActiveUsers : [User]

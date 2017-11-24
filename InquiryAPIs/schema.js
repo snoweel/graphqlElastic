@@ -13,7 +13,7 @@ const resolver = require('./users/Model/Resolver/resolver')
 const RootQuery = `
 type RootQuery {
   getUserDetails(userId: String!): User,
-  getActiveUsers: User
+  getActiveUsers: [User]
 }
 `;
 
@@ -26,8 +26,7 @@ schema {
 // const typeDef={userSchema,todoSchema}
 const schema = makeExecutableSchema(
   { typeDefs:[SchemaDefinition, RootQuery,userSchema],
-    resolver});
-console.log((makeExecutableSchema))
+    resolvers:resolver});
 /**
  * exporting schema
  */

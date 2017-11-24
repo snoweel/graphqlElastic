@@ -15,19 +15,27 @@ const resolvers = {
      * @param {*} ctx 
      * @param {*} info 
      */
-     getUserDetails:(_, args)=>{
-       console.log("here")
-         if(args.userId){
-            body={
-                "query": {
-                  "match":{
-                      "query":args.userId,
-                      "field": id
-                  }
-                }
-              }
-            return queryUtil.getUserDetails('user',body)
-         }
+    getUserDetails(_, args,context){
+       return {
+        "id":"1",
+        "fname":"Alex",
+        "lname":"Galllio",
+        "email":"dfdgf@hhj.com",
+        "isActive":true,
+        "birthDate":"12/12/1990",
+        "pinCode":12133
+    }
+        //  if(args.userId){
+        //     body={
+        //         "query": {
+        //           "match":{
+        //               "query":args.userId,
+        //               "field": id
+        //           }
+        //         }
+        //       }
+        //     return queryUtil.getUserDetails(context,'user',body)
+        //  }
             
       },
     /**
@@ -37,17 +45,26 @@ const resolvers = {
      * @param {*} ctx 
      * @param {*} info 
      */
-     getActiveUsers:(_)=>{
-      console.log("here")
-        body={
-            "query": {
-              "match":{
-                  "query":true,
-                  "field": "isActive"
-              }
-            }
-          }
-          return queryUtil.getUserDetails('user',body)
+    getActiveUsers(_,args,context){
+      return [{
+        "id":"1",
+        "fname":"Alex",
+        "lname":"Galllio",
+        "email":"dfdgf@hhj.com",
+        "isActive":true,
+        "birthDate":"12/12/1990",
+        "pinCode":12133
+    }]
+      // console.log("here")
+      //   body={
+      //       "query": {
+      //         "match":{
+      //             "query":true,
+      //             "field": "isActive"
+      //         }
+      //       }
+      //     }
+      //     return queryUtil.getUserDetails(context,'user',body)
     }
   
     //,
@@ -73,6 +90,17 @@ const resolvers = {
     //     if(args.userId)
     //         return query.getToDos(root,args,ctx,info)
     // }
+     },
+     User:{
+      todos(userId){
+        return {    
+          id:"5",
+          text:"now",
+          userId:"1",
+          done:"false",
+          targetDate:"24/11/2017"
+        }
+      }
      }
      }
   

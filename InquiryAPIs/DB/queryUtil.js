@@ -5,8 +5,8 @@
  * 
  * */
 const indexName="assignment01";
-const client=require('../../config/database')
-client.connectToES().then(function(esClient){
+// const client=require('../../config/database')
+// client.connectToES().then(function(esClient){
    /**
     * 
     * @param {*} text 
@@ -14,11 +14,11 @@ client.connectToES().then(function(esClient){
     * @param {*} typeName 
     * @param {*} callback 
     */
-   exports.getUserDetail=function (typename, body) {
+   exports.getUserDetail=function (context,typename, body) {
        console.log("here")
-       return {fname:"Alex"}
+       return {"fname":"Alex"}
     //   return new Promise(function(resolve,reject){
-    //    esClient.search({
+    //    context.esClient.search({
     //        index: indexName,
     //        type: typeName,
     //        body: body
@@ -34,9 +34,9 @@ client.connectToES().then(function(esClient){
     //   })
            
    }
-   exports.getActiveUsers=function (typename, body) {
+   exports.getActiveUsers=function (context,typename, body) {
        return new Promise(function(resolve,reject){
-        esClient.search({
+        context.esClient.search({
             index: indexName,
             type: typeName,
             body: body
@@ -52,4 +52,4 @@ client.connectToES().then(function(esClient){
        })
             
     }
-})
+// })
